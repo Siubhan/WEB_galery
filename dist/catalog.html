@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="./css/bootstrap-reboot.min.css">
     <link rel="stylesheet" href="./css/main.css">
-    <title>Каталог</title>
+    <title>Галерея: Каталог</title>
   </head>
   <body>
     <nav>
@@ -17,7 +17,79 @@
       </ul>
     </nav>
     <main>
-      <h1>Демо-версия таблицы, переносить всю - издевательство</h1>
+      <h1>Демо-версия таблицы</h1>
+      <div class="row">
+        <details>
+          <summary>График</summary>
+          <form>
+            <table>
+              <tr>
+                <th>Значениe по оси OX</th>
+                <th>Результат</th>
+              </tr>
+              <tr>
+                <td>
+                  <input type="radio" name="ox" value="0">Автор
+                  <br>
+                  <input type="radio" name="ox" value="1">Жанр
+                  <br>
+                  <input type="radio" name="ox" value="2">Страна
+                </td>
+                <td>
+                  <input type="checkbox" name="oy" value="0" checked>Максимальное количество картин
+                  <br>
+                  <input type="checkbox" name="oy" value="1">Минимальное количество картин
+                </td>
+              </tr>
+            </table>
+            <input type="button" value="Построить">
+            <p>Здесь будет график</p>
+          </form>
+        </details>
+      </div>
+      <div class="row">
+        <details>
+          <summary>Фильтр</summary>
+          <form>
+            <label for="author">Автор</label>
+            <input type="text" name="author"><br>
+            <label for="genre">Жанр</label>
+            <input type="text" name="genre"><br>
+            <label for="country">Страна</label>
+            <input type="text" name="country"><br>
+            <input type="button" value="Найти">
+          </form>
+        </details>
+      </div>
+      <div class="row">
+        <details>
+          <summary>Сортировка</summary>
+          <form>Первый уровень:
+            <select name="sortFirst">
+              <option value="0">Нет</option>
+              <option value="1">Автор</option>
+              <option value="2">Жанр</option>
+              <option value="3">Страна</option>
+            </select>&nbsp; по убыванию?
+            <input type="checkbox" name="descFirst"><br>Второй уровень:
+            <select name="sortSecond">
+              <option value="0">Нет</option>
+              <option value="1">Автор</option>
+              <option value="2">Жанр</option>
+              <option value="3">Страна</option>
+            </select>&nbsp; по убыванию?
+            <input type="checkbox" name="descFirst"><br>Третий уровень:
+            <select name="sortThird">
+              <option value="0">Нет</option>
+              <option value="1">Автор</option>
+              <option value="2">Жанр</option>
+              <option value="3">Страна</option>
+            </select>&nbsp; по убыванию?
+            <input type="checkbox" name="descFirst"><br>
+            <input type="button" value="Сортировать">
+          </form>
+        </details>
+      </div>
       <div class="row">
         <table>
           <tbody>

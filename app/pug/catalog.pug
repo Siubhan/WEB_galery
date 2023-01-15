@@ -1,13 +1,89 @@
 extends template
 block link
-	-var title = 'Каталог'
+	-var title = 'Галерея: Каталог'
 	link(rel="stylesheet", href="./css/bootstrap-reboot.min.css")
 	link(rel="stylesheet", href="./css/main.css")
 block content
 	nav
 		+createNav([['Главная','index.html',0], ['Афиша','afisha.html',0], ['Каталог','catalog.html',1]])
 	main
-		h1 Демо-версия таблицы, переносить всю - издевательство
+		h1 Демо-версия таблицы
+		.row
+			details
+				summary График
+				form
+					table
+						tr
+							th Значениe по оси OX
+							th Результат
+						tr
+							td
+								input(type="radio" name="ox" value="0")
+								| Автор
+								|
+								br
+								input(type="radio" name="ox" value="1")
+								| Жанр
+								|
+								br
+								input(type="radio" name="ox" value="2")
+								| Страна
+							td
+								input(type="checkbox" name="oy" value="0" checked)
+								| Максимальное количество картин
+								|
+								br
+								input(type="checkbox" name="oy" value="1")
+								| Минимальное количество картин
+					input(type="button" value="Построить")
+					p Здесь будет график
+		.row
+			details
+				summary Фильтр
+				form
+					label(for="author") Автор
+					input(type="text" name="author")
+					br
+					label(for="genre") Жанр
+					input(type="text" name="genre")
+					br
+					label(for="country") Страна
+					input(type="text" name="country")
+					br
+					input(type="button" value="Найти")
+		.row
+			details
+				summary Сортировка
+				form
+					| Первый уровень:
+					select(name="sortFirst")
+						option(value="0")="Нет"
+						option(value="1")="Автор"
+						option(value="2")="Жанр"
+						option(value="3")="Страна"
+					| &nbsp; по убыванию?
+					input(type="checkbox" name="descFirst")
+					br
+					| Второй уровень:
+					select(name="sortSecond")
+						option(value="0")="Нет"
+						option(value="1")="Автор"
+						option(value="2")="Жанр"
+						option(value="3")="Страна"
+					| &nbsp; по убыванию?
+					input(type="checkbox" name="descFirst")
+					br
+					| Третий уровень:
+					select(name="sortThird")
+						option(value="0")="Нет"
+						option(value="1")="Автор"
+						option(value="2")="Жанр"
+						option(value="3")="Страна"
+					| &nbsp; по убыванию?
+					input(type="checkbox" name="descFirst")
+					br
+					input(type="button" value="Сортировать")
+
 		.row
 			table
 				tbody

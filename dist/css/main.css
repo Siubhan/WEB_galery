@@ -122,8 +122,19 @@ nav ul li a:hover {
   -o-object-fit: cover;
   object-fit: cover;
 }
+.row .column img:hover {
+  border: thick solid #89e3d9;
+}
 .row .column p {
   padding: 5px;
+}
+.row .column a {
+  text-decoration: none;
+  color: #000;
+}
+.row .column a:hover {
+  text-decoration: underline;
+  color: #508d86;
 }
 table {
   display: flex;

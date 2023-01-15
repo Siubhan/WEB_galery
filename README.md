@@ -1,1 +1,1 @@
-# html part of web project
+# update -> pug + stylus web pages

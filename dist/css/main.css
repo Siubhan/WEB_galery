@@ -137,17 +137,20 @@ nav ul li a:hover {
   color: #508d86;
 }
 table {
-  display: flex;
-  flex-flow: row nowrap;
+  display: block;
+  flex-wrap: nowrap;
   align-items: center;
   max-width: 100%;
   width: auto;
   border: thin solid #000;
 }
+table th {
+  background-color: #9d9d9d;
+}
 table tr {
   border: thin solid #000;
 }
-table tr:nth-child(2n+1) {
+table tr:nth-child(2n) {
   background-color: #9d9d9d;
 }
 table tr td {
@@ -237,4 +240,25 @@ footer .footer-item p {
   table {
     overflow-x: auto;
   }
+  .back_picture {
+    flex-direction: column;
+  }
+  .back_picture a {
+    width: 100%;
+    margin: 5px;
+  }
+}
+.back_picture,
+display flex,
+.back_picture a {
+  width: 20%;
+  margin: 5px;
+}
+.galImg {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: auto;
+  height: 150px;
+  padding: 5px;
 }

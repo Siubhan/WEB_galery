@@ -116,15 +116,17 @@ nav
 				text-decoration underline
 				color #508d86
 table
-	display flex
-	flex-flow row nowrap
+	display block
+	flex-wrap nowrap
 	align-items center
 	max-width 100%
 	width auto
 	border thin solid black
+	& th
+		background-color #9d9d9d
 	& tr
 		border thin solid black
-		&:nth-child(2n+1)
+		&:nth-child(2n)
 			background-color #9d9d9d
 		& td
 			text-align center
@@ -197,7 +199,25 @@ footer
 			flex-flow column wrap
 	table
 		overflow-x auto
+	.back_picture 
+		flex-direction column
+	.back_picture a 
+		width 100%
+		margin 5px
 
+.back_picture 
+    display flex
 
+.back_picture a 
+	width 20%
+	margin 5px
+	
+.galImg
+	display flex
+	flex-direction row
+	justify-content space-evenly
+	width auto
+	height 150px
+	padding 5px
 
 

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="./css/bootstrap-reboot.min.css">
     <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/venobox.min.css">
     <title>Галерея: Каталог</title>
   </head>
   <body>
@@ -17,7 +18,9 @@
       </ul>
     </nav>
     <main>
-      <h1>Демо-версия таблицы</h1>
+      <div class="back-pictures">
+        <div class="row"><a class="my-link" data-gall="myGallery" href="img/3.jpg"><img class="galImg" src="img/3.jpg"></a><a class="my-link" data-gall="myGallery" href="img/1.jpg"><img class="galImg" src="img/1.jpg"></a><a class="my-link" data-gall="myGallery" href="img/4.jpg"><img class="galImg" src="img/4.jpg"></a></div>
+      </div><br>
       <div class="row">
         <details>
           <summary>График</summary>
@@ -29,21 +32,15 @@
               </tr>
               <tr>
                 <td>
-                  <input type="radio" name="ox" value="0">Автор
-                  <br>
-                  <input type="radio" name="ox" value="1">Жанр
-                  <br>
-                  <input type="radio" name="ox" value="2">Страна
+                  <input type="radio" name="ox" checked>Год
                 </td>
                 <td>
-                  <input type="checkbox" name="oy" value="0" checked>Максимальное количество картин
-                  <br>
-                  <input type="checkbox" name="oy" value="1">Минимальное количество картин
+                  <input type="radio" name="oy" checked>Количество реплик
                 </td>
               </tr>
             </table>
-            <input type="button" value="Построить">
-            <p>Здесь будет график</p>
+            <input type="button" value="Построить" onclick="buildChart(this.form.ox.checked, this.form.oy.checked)">
+            <div class="chart"> </div>
           </form>
         </details>
       </div>
@@ -55,9 +52,7 @@
             <input type="text" name="author"><br>
             <label for="genre">Жанр</label>
             <input type="text" name="genre"><br>
-            <label for="country">Страна</label>
-            <input type="text" name="country"><br>
-            <input type="button" value="Найти">
+            <input type="button" value="Найти" onclick="filterTable(this.form.author.value, this.form.genre.value)">
           </form>
         </details>
       </div>
@@ -78,21 +73,21 @@
               <option value="2">Жанр</option>
               <option value="3">Страна</option>
             </select>&nbsp; по убыванию?
-            <input type="checkbox" name="descFirst"><br>Третий уровень:
+            <input type="checkbox" name="descSecond"><br>Третий уровень:
             <select name="sortThird">
               <option value="0">Нет</option>
               <option value="1">Автор</option>
               <option value="2">Жанр</option>
               <option value="3">Страна</option>
             </select>&nbsp; по убыванию?
-            <input type="checkbox" name="descFirst"><br>
-            <input type="button" value="Сортировать">
+            <input type="checkbox" name="descThird"><br>
+            <input type="button" value="Сортировать" onclick="howSortTable(this.form.sortFirst.value, this.form.descFirst.checked,this.form.sortSecond.value, this.form.descSecond.checked, this.form.sortThird.value, this.form.descThird.checked)">
           </form>
         </details>
       </div>
       <div class="row">
-        <table>
-          <tbody>
+        <table id="table">
+          <thead>
             <tr>
               <th>Автор</th>
               <th>Название</th>
@@ -101,44 +96,14 @@
               <th>Год</th>
               <th>Количество реплик</th>
             </tr>
+          </thead>
+          <tbody>
             <tr>
               <td>Исаак Ильич Левитан</td>
               <td>Над вечным покоем</td>
               <td>Пейзаж</td>
               <td>Россия</td>
-              <td>1894</td>
-              <td>0</td>
-            </tr>
-            <tr>
-              <td>Исаак Ильич Левитан</td>
-              <td>Над вечным покоем</td>
-              <td>Пейзаж</td>
-              <td>Россия</td>
-              <td>1895</td>
-              <td>1</td>
-            </tr>
-            <tr>
-              <td>Исаак Ильич Левитан</td>
-              <td>Над вечным покоем</td>
-              <td>Пейзаж</td>
-              <td>Россия</td>
-              <td>1896</td>
-              <td>2</td>
-            </tr>
-            <tr>
-              <td>Исаак Ильич Левитан</td>
-              <td>Над вечным покоем</td>
-              <td>Пейзаж</td>
-              <td>Россия</td>
-              <td>1897</td>
-              <td>3</td>
-            </tr>
-            <tr>
-              <td>Исаак Ильич Левитан</td>
-              <td>Над вечным покоем</td>
-              <td>Пейзаж</td>
-              <td>Россия</td>
-              <td>1898</td>
+              <td>1967</td>
               <td>4</td>
             </tr>
             <tr>
@@ -146,79 +111,7 @@
               <td>Над вечным покоем</td>
               <td>Пейзаж</td>
               <td>Россия</td>
-              <td>1899</td>
-              <td>5</td>
-            </tr>
-            <tr>
-              <td>Исаак Ильич Левитан</td>
-              <td>Над вечным покоем</td>
-              <td>Пейзаж</td>
-              <td>Россия</td>
-              <td>1900</td>
-              <td>6</td>
-            </tr>
-            <tr>
-              <td>Исаак Ильич Левитан</td>
-              <td>Над вечным покоем</td>
-              <td>Пейзаж</td>
-              <td>Россия</td>
-              <td>1901</td>
-              <td>7</td>
-            </tr>
-            <tr>
-              <td>Исаак Ильич Левитан</td>
-              <td>Над вечным покоем</td>
-              <td>Пейзаж</td>
-              <td>Россия</td>
-              <td>1902</td>
-              <td>8</td>
-            </tr>
-            <tr>
-              <td>Исаак Ильич Левитан</td>
-              <td>Над вечным покоем</td>
-              <td>Пейзаж</td>
-              <td>Россия</td>
-              <td>1903</td>
-              <td>9</td>
-            </tr>
-            <tr>
-              <td>Исаак Ильич Левитан</td>
-              <td>Над вечным покоем</td>
-              <td>Пейзаж</td>
-              <td>Россия</td>
-              <td>1904</td>
-              <td>10</td>
-            </tr>
-            <tr>
-              <td>Исаак Ильич Левитан</td>
-              <td>Над вечным покоем</td>
-              <td>Пейзаж</td>
-              <td>Россия</td>
-              <td>1905</td>
-              <td>11</td>
-            </tr>
-            <tr>
-              <td>Исаак Ильич Левитан</td>
-              <td>Над вечным покоем</td>
-              <td>Пейзаж</td>
-              <td>Россия</td>
-              <td>1906</td>
-              <td>12</td>
-            </tr>
-            <tr>
-              <td>Исаак Ильич Левитан</td>
-              <td>Над вечным покоем</td>
-              <td>Пейзаж</td>
-              <td>Россия</td>
-              <td>1907</td>
-              <td>13</td>
-            </tr>
-            <tr>
-              <td>Исаак Ильич Левитан</td>
-              <td>Над вечным покоем</td>
-              <td>Пейзаж</td>
-              <td>Россия</td>
-              <td>1908</td>
+              <td>1965</td>
               <td>14</td>
             </tr>
             <tr>
@@ -226,23 +119,7 @@
               <td>Над вечным покоем</td>
               <td>Пейзаж</td>
               <td>Россия</td>
-              <td>1909</td>
-              <td>15</td>
-            </tr>
-            <tr>
-              <td>Исаак Ильич Левитан</td>
-              <td>Над вечным покоем</td>
-              <td>Пейзаж</td>
-              <td>Россия</td>
-              <td>1910</td>
-              <td>16</td>
-            </tr>
-            <tr>
-              <td>Исаак Ильич Левитан</td>
-              <td>Над вечным покоем</td>
-              <td>Пейзаж</td>
-              <td>Россия</td>
-              <td>1911</td>
+              <td>1969</td>
               <td>17</td>
             </tr>
             <tr>
@@ -250,23 +127,7 @@
               <td>Над вечным покоем</td>
               <td>Пейзаж</td>
               <td>Россия</td>
-              <td>1912</td>
-              <td>18</td>
-            </tr>
-            <tr>
-              <td>Исаак Ильич Левитан</td>
-              <td>Над вечным покоем</td>
-              <td>Пейзаж</td>
-              <td>Россия</td>
-              <td>1913</td>
-              <td>19</td>
-            </tr>
-            <tr>
-              <td>Исаак Ильич Левитан</td>
-              <td>Над вечным покоем</td>
-              <td>Пейзаж</td>
-              <td>Россия</td>
-              <td>1914</td>
+              <td>1960</td>
               <td>20</td>
             </tr>
             <tr>
@@ -274,232 +135,368 @@
               <td>Над вечным покоем</td>
               <td>Пейзаж</td>
               <td>Россия</td>
-              <td>1915</td>
-              <td>21</td>
+              <td>1963</td>
+              <td>18</td>
             </tr>
             <tr>
               <td>Исаак Ильич Левитан</td>
               <td>Над вечным покоем</td>
               <td>Пейзаж</td>
               <td>Россия</td>
-              <td>1916</td>
-              <td>22</td>
+              <td>1965</td>
+              <td>8</td>
             </tr>
             <tr>
               <td>Исаак Ильич Левитан</td>
               <td>Над вечным покоем</td>
               <td>Пейзаж</td>
               <td>Россия</td>
-              <td>1917</td>
-              <td>23</td>
+              <td>1969</td>
+              <td>8</td>
             </tr>
             <tr>
               <td>Исаак Ильич Левитан</td>
               <td>Над вечным покоем</td>
               <td>Пейзаж</td>
               <td>Россия</td>
-              <td>1918</td>
-              <td>24</td>
+              <td>1964</td>
+              <td>19</td>
             </tr>
             <tr>
               <td>Исаак Ильич Левитан</td>
               <td>Над вечным покоем</td>
               <td>Пейзаж</td>
               <td>Россия</td>
-              <td>1919</td>
+              <td>1962</td>
+              <td>10</td>
+            </tr>
+            <tr>
+              <td>Исаак Ильич Левитан</td>
+              <td>Над вечным покоем</td>
+              <td>Пейзаж</td>
+              <td>Россия</td>
+              <td>1966</td>
               <td>25</td>
             </tr>
             <tr>
-              <td>Исаак Ильич Левитан</td>
-              <td>Над вечным покоем</td>
-              <td>Пейзаж</td>
-              <td>Россия</td>
-              <td>1920</td>
-              <td>26</td>
+              <td>Художник 1</td>
+              <td>Названиe 10</td>
+              <td>Портрет</td>
+              <td>Болгария</td>
+              <td>1960</td>
+              <td>2</td>
             </tr>
             <tr>
-              <td>Исаак Ильич Левитан</td>
-              <td>Над вечным покоем</td>
-              <td>Пейзаж</td>
-              <td>Россия</td>
-              <td>1921</td>
-              <td>27</td>
+              <td>Художник 1</td>
+              <td>Названиe 11</td>
+              <td>Портрет</td>
+              <td>Болгария</td>
+              <td>1962</td>
+              <td>4</td>
             </tr>
             <tr>
-              <td>Исаак Ильич Левитан</td>
-              <td>Над вечным покоем</td>
-              <td>Пейзаж</td>
-              <td>Россия</td>
-              <td>1922</td>
-              <td>28</td>
+              <td>Художник 1</td>
+              <td>Названиe 12</td>
+              <td>Портрет</td>
+              <td>Болгария</td>
+              <td>1962</td>
+              <td>15</td>
             </tr>
             <tr>
-              <td>Исаак Ильич Левитан</td>
-              <td>Над вечным покоем</td>
-              <td>Пейзаж</td>
-              <td>Россия</td>
-              <td>1923</td>
-              <td>29</td>
+              <td>Художник 1</td>
+              <td>Названиe 13</td>
+              <td>Портрет</td>
+              <td>Болгария</td>
+              <td>1968</td>
+              <td>22</td>
             </tr>
             <tr>
-              <td>Исаак Ильич Левитан</td>
-              <td>Над вечным покоем</td>
-              <td>Пейзаж</td>
-              <td>Россия</td>
-              <td>1924</td>
-              <td>30</td>
+              <td>Художник 1</td>
+              <td>Названиe 14</td>
+              <td>Портрет</td>
+              <td>Болгария</td>
+              <td>1965</td>
+              <td>11</td>
             </tr>
             <tr>
-              <td>Исаак Ильич Левитан</td>
-              <td>Над вечным покоем</td>
-              <td>Пейзаж</td>
-              <td>Россия</td>
-              <td>1925</td>
-              <td>31</td>
+              <td>Художник 1</td>
+              <td>Названиe 15</td>
+              <td>Портрет</td>
+              <td>Болгария</td>
+              <td>1966</td>
+              <td>20</td>
             </tr>
             <tr>
-              <td>Исаак Ильич Левитан</td>
-              <td>Над вечным покоем</td>
-              <td>Пейзаж</td>
-              <td>Россия</td>
-              <td>1926</td>
-              <td>32</td>
+              <td>Художник 1</td>
+              <td>Названиe 16</td>
+              <td>Портрет</td>
+              <td>Болгария</td>
+              <td>1962</td>
+              <td>23</td>
             </tr>
             <tr>
-              <td>Исаак Ильич Левитан</td>
-              <td>Над вечным покоем</td>
-              <td>Пейзаж</td>
-              <td>Россия</td>
-              <td>1927</td>
-              <td>33</td>
+              <td>Художник 1</td>
+              <td>Названиe 17</td>
+              <td>Портрет</td>
+              <td>Болгария</td>
+              <td>1966</td>
+              <td>18</td>
             </tr>
             <tr>
-              <td>Исаак Ильич Левитан</td>
-              <td>Над вечным покоем</td>
-              <td>Пейзаж</td>
-              <td>Россия</td>
-              <td>1928</td>
-              <td>34</td>
+              <td>Художник 1</td>
+              <td>Названиe 18</td>
+              <td>Портрет</td>
+              <td>Болгария</td>
+              <td>1969</td>
+              <td>8</td>
             </tr>
             <tr>
-              <td>Исаак Ильич Левитан</td>
-              <td>Над вечным покоем</td>
-              <td>Пейзаж</td>
-              <td>Россия</td>
-              <td>1929</td>
-              <td>35</td>
+              <td>Художник 1</td>
+              <td>Названиe 19</td>
+              <td>Портрет</td>
+              <td>Болгария</td>
+              <td>1968</td>
+              <td>16</td>
             </tr>
             <tr>
-              <td>Исаак Ильич Левитан</td>
-              <td>Над вечным покоем</td>
-              <td>Пейзаж</td>
-              <td>Россия</td>
-              <td>1930</td>
-              <td>36</td>
+              <td>Художник 1</td>
+              <td>Названиe 20</td>
+              <td>Портрет</td>
+              <td>Болгария</td>
+              <td>1967</td>
+              <td>8</td>
             </tr>
             <tr>
-              <td>Исаак Ильич Левитан</td>
-              <td>Над вечным покоем</td>
-              <td>Пейзаж</td>
-              <td>Россия</td>
-              <td>1931</td>
-              <td>37</td>
+              <td>Художник 1</td>
+              <td>Названиe 21</td>
+              <td>Портрет</td>
+              <td>Болгария</td>
+              <td>1967</td>
+              <td>12</td>
             </tr>
             <tr>
-              <td>Исаак Ильич Левитан</td>
-              <td>Над вечным покоем</td>
-              <td>Пейзаж</td>
-              <td>Россия</td>
-              <td>1932</td>
-              <td>38</td>
+              <td>Художник 1</td>
+              <td>Названиe 22</td>
+              <td>Портрет</td>
+              <td>Болгария</td>
+              <td>1966</td>
+              <td>19</td>
             </tr>
             <tr>
-              <td>Исаак Ильич Левитан</td>
-              <td>Над вечным покоем</td>
-              <td>Пейзаж</td>
-              <td>Россия</td>
-              <td>1933</td>
-              <td>39</td>
+              <td>Художник 1</td>
+              <td>Названиe 23</td>
+              <td>Портрет</td>
+              <td>Болгария</td>
+              <td>1960</td>
+              <td>18</td>
             </tr>
             <tr>
-              <td>Исаак Ильич Левитан</td>
-              <td>Над вечным покоем</td>
-              <td>Пейзаж</td>
-              <td>Россия</td>
-              <td>1934</td>
-              <td>40</td>
+              <td>Художник 1</td>
+              <td>Названиe 24</td>
+              <td>Портрет</td>
+              <td>Болгария</td>
+              <td>1961</td>
+              <td>6</td>
             </tr>
             <tr>
-              <td>Исаак Ильич Левитан</td>
-              <td>Над вечным покоем</td>
-              <td>Пейзаж</td>
-              <td>Россия</td>
-              <td>1935</td>
-              <td>41</td>
+              <td>Художник 1</td>
+              <td>Названиe 25</td>
+              <td>Портрет</td>
+              <td>Болгария</td>
+              <td>1968</td>
+              <td>24</td>
             </tr>
             <tr>
-              <td>Исаак Ильич Левитан</td>
-              <td>Над вечным покоем</td>
-              <td>Пейзаж</td>
-              <td>Россия</td>
-              <td>1936</td>
-              <td>42</td>
+              <td>Художник 1</td>
+              <td>Названиe 26</td>
+              <td>Портрет</td>
+              <td>Болгария</td>
+              <td>1964</td>
+              <td>12</td>
             </tr>
             <tr>
-              <td>Исаак Ильич Левитан</td>
-              <td>Над вечным покоем</td>
-              <td>Пейзаж</td>
-              <td>Россия</td>
-              <td>1937</td>
-              <td>43</td>
+              <td>Художник 1</td>
+              <td>Названиe 27</td>
+              <td>Портрет</td>
+              <td>Болгария</td>
+              <td>1965</td>
+              <td>24</td>
             </tr>
             <tr>
-              <td>Исаак Ильич Левитан</td>
-              <td>Над вечным покоем</td>
-              <td>Пейзаж</td>
-              <td>Россия</td>
-              <td>1938</td>
-              <td>44</td>
+              <td>Художник 1</td>
+              <td>Названиe 28</td>
+              <td>Портрет</td>
+              <td>Болгария</td>
+              <td>1961</td>
+              <td>18</td>
             </tr>
             <tr>
-              <td>Исаак Ильич Левитан</td>
-              <td>Над вечным покоем</td>
-              <td>Пейзаж</td>
-              <td>Россия</td>
-              <td>1939</td>
-              <td>45</td>
+              <td>Художник 1</td>
+              <td>Названиe 29</td>
+              <td>Портрет</td>
+              <td>Болгария</td>
+              <td>1967</td>
+              <td>12</td>
             </tr>
             <tr>
-              <td>Исаак Ильич Левитан</td>
-              <td>Над вечным покоем</td>
+              <td>Художник 2</td>
+              <td>Названиe 30</td>
               <td>Пейзаж</td>
-              <td>Россия</td>
-              <td>1940</td>
-              <td>46</td>
+              <td>Сербия</td>
+              <td>1969</td>
+              <td>1</td>
             </tr>
             <tr>
-              <td>Исаак Ильич Левитан</td>
-              <td>Над вечным покоем</td>
+              <td>Художник 2</td>
+              <td>Названиe 31</td>
               <td>Пейзаж</td>
-              <td>Россия</td>
-              <td>1941</td>
-              <td>47</td>
+              <td>Сербия</td>
+              <td>1962</td>
+              <td>7</td>
             </tr>
             <tr>
-              <td>Исаак Ильич Левитан</td>
-              <td>Над вечным покоем</td>
+              <td>Художник 2</td>
+              <td>Названиe 32</td>
               <td>Пейзаж</td>
-              <td>Россия</td>
-              <td>1942</td>
-              <td>48</td>
+              <td>Сербия</td>
+              <td>1967</td>
+              <td>13</td>
             </tr>
             <tr>
-              <td>Исаак Ильич Левитан</td>
-              <td>Над вечным покоем</td>
+              <td>Художник 2</td>
+              <td>Названиe 33</td>
               <td>Пейзаж</td>
-              <td>Россия</td>
-              <td>1943</td>
-              <td>49</td>
+              <td>Сербия</td>
+              <td>1969</td>
+              <td>18</td>
+            </tr>
+            <tr>
+              <td>Художник 2</td>
+              <td>Названиe 34</td>
+              <td>Пейзаж</td>
+              <td>Сербия</td>
+              <td>1961</td>
+              <td>8</td>
+            </tr>
+            <tr>
+              <td>Художник 2</td>
+              <td>Названиe 35</td>
+              <td>Пейзаж</td>
+              <td>Сербия</td>
+              <td>1964</td>
+              <td>24</td>
+            </tr>
+            <tr>
+              <td>Художник 2</td>
+              <td>Названиe 36</td>
+              <td>Пейзаж</td>
+              <td>Сербия</td>
+              <td>1966</td>
+              <td>11</td>
+            </tr>
+            <tr>
+              <td>Художник 2</td>
+              <td>Названиe 37</td>
+              <td>Пейзаж</td>
+              <td>Сербия</td>
+              <td>1965</td>
+              <td>13</td>
+            </tr>
+            <tr>
+              <td>Художник 2</td>
+              <td>Названиe 38</td>
+              <td>Пейзаж</td>
+              <td>Сербия</td>
+              <td>1962</td>
+              <td>12</td>
+            </tr>
+            <tr>
+              <td>Художник 2</td>
+              <td>Названиe 39</td>
+              <td>Пейзаж</td>
+              <td>Сербия</td>
+              <td>1963</td>
+              <td>24</td>
+            </tr>
+            <tr>
+              <td>Художник 2</td>
+              <td>Названиe 40</td>
+              <td>Пейзаж</td>
+              <td>Сербия</td>
+              <td>1968</td>
+              <td>16</td>
+            </tr>
+            <tr>
+              <td>Художник 2</td>
+              <td>Названиe 41</td>
+              <td>Пейзаж</td>
+              <td>Сербия</td>
+              <td>1968</td>
+              <td>6</td>
+            </tr>
+            <tr>
+              <td>Художник 2</td>
+              <td>Названиe 42</td>
+              <td>Пейзаж</td>
+              <td>Сербия</td>
+              <td>1965</td>
+              <td>9</td>
+            </tr>
+            <tr>
+              <td>Художник 2</td>
+              <td>Названиe 43</td>
+              <td>Пейзаж</td>
+              <td>Сербия</td>
+              <td>1969</td>
+              <td>21</td>
+            </tr>
+            <tr>
+              <td>Художник 2</td>
+              <td>Названиe 44</td>
+              <td>Пейзаж</td>
+              <td>Сербия</td>
+              <td>1963</td>
+              <td>14</td>
+            </tr>
+            <tr>
+              <td>Художник 2</td>
+              <td>Названиe 45</td>
+              <td>Пейзаж</td>
+              <td>Сербия</td>
+              <td>1963</td>
+              <td>16</td>
+            </tr>
+            <tr>
+              <td>Художник 2</td>
+              <td>Названиe 46</td>
+              <td>Пейзаж</td>
+              <td>Сербия</td>
+              <td>1968</td>
+              <td>21</td>
+            </tr>
+            <tr>
+              <td>Художник 2</td>
+              <td>Названиe 47</td>
+              <td>Пейзаж</td>
+              <td>Сербия</td>
+              <td>1963</td>
+              <td>17</td>
+            </tr>
+            <tr>
+              <td>Художник 2</td>
+              <td>Названиe 48</td>
+              <td>Пейзаж</td>
+              <td>Сербия</td>
+              <td>1964</td>
+              <td>14</td>
+            </tr>
+            <tr>
+              <td>Художник 2</td>
+              <td>Названиe 49</td>
+              <td>Портрет</td>
+              <td>Сербия</td>
+              <td>1962</td>
+              <td>20</td>
             </tr>
           </tbody>
         </table>
@@ -517,7 +514,9 @@
         <p>© Картинная галерея, 2022-2023</p>
       </div>
     </footer>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
     <script src="js/jquery-3.5.1.min.js"></script>
+    <script src="js/venobox.min.js"></script>
     <script src="js/main.js"></script>
   </body>
 </html>
